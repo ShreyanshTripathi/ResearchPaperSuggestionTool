@@ -2,6 +2,7 @@ import logging
 from typing import Optional
 
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.core.schema import TextNode
 from llama_index.vector_stores.chroma import ChromaVectorStore
@@ -37,10 +38,10 @@ def _synthesise_interest_map(
     if not interest_map and not similar_searches:
         return "No research history yet. This is your first search session."
 
-    llm = ChatOpenAI(
+    llm = ChatGroq(
         model=settings.llm_model,
         temperature=0.2,   # Slightly creative for narrative generation
-        api_key=settings.openai_api_key,
+        api_key=settings.api_key,
     )
 
     top_interests = list(interest_map.items())[:10]

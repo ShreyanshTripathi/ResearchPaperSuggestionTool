@@ -3,6 +3,7 @@ import logging
 from typing import Optional
 
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 from config import settings
 from models import AgentResult, Paper
@@ -13,10 +14,10 @@ logger = logging.getLogger(__name__)
 
 
 def _expand_to_related_topics(query: str) -> list[str]:
-    llm = ChatOpenAI(
+    llm = ChatGroq(
         model=settings.llm_model,
         temperature=0.0,
-        api_key=settings.openai_api_key,
+        api_key=settings.api_key,
     )
 
     n = settings.broad_topic_expansion_count
@@ -103,10 +104,10 @@ def _score_broader_relevance(
     if not papers:
         return []
 
-    llm = ChatOpenAI(
+    llm = ChatGroq(
         model=settings.llm_model,
         temperature=0.0,
-        api_key=settings.openai_api_key,
+        api_key=settings.api_key,
     )
 
     topics_str = ", ".join(broader_topics)

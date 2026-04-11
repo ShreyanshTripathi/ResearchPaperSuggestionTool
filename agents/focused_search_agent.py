@@ -2,9 +2,10 @@ import json
 import logging
 from typing import Any
 
-from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
+from langchain_classic.agents import AgentExecutor, create_openai_tools_agent, create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 from config import settings
 from models import AgentResult, Paper
@@ -31,10 +32,10 @@ to a query about "RL-based machine unlearning" unless it discusses unlearning.
 
 
 def build_focused_agent() -> AgentExecutor:
-    llm = ChatOpenAI(
+    llm = ChatGroq(
         model=settings.llm_model,
         temperature=settings.llm_temperature,
-        api_key=settings.openai_api_key,
+        api_key=settings.api_key,
     )
 
     prompt = ChatPromptTemplate.from_messages([
@@ -45,7 +46,7 @@ def build_focused_agent() -> AgentExecutor:
 
     tools = [arxiv_search_tool]
 
-    agent = create_openai_tools_agent(llm, tools, prompt)
+    agent = create_tool_calling_agent(llm, tools, prompt)
     return AgentExecutor(
         agent=agent,
         tools=tools,
@@ -59,10 +60,10 @@ def _llm_rerank_papers(papers: list[Paper], query: str) -> list[Paper]:
     if not papers:
         return []
 
-    llm = ChatOpenAI(
+    llm = ChatGroq(
         model=settings.llm_model,
         temperature=0.0,
-        api_key=settings.openai_api_key,
+        api_key=settings.api_key,
     )
 
     paper_list = "\n\n".join(

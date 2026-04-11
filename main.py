@@ -32,10 +32,10 @@ def configure_logging(verbose: bool = False) -> None:
 
 
 def check_prerequisites() -> bool:
-    if not settings.openai_api_key:
+    if not settings.api_key:
         console.print(
-            "[bold red]Error:[/bold red] OPENAI_API_KEY is not set.\n"
-            "Create a .env file with OPENAI_API_KEY=sk-... or export it in your shell.",
+            "[bold red]Error:[/bold red] API_KEY is not set.\n"
+            "Create a .env file with API_KEY=sk-... or export it in your shell.",
         )
         return False
     return True

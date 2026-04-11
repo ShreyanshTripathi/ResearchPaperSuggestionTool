@@ -82,9 +82,9 @@ class ResearchVectorStore:
                 "authors": ", ".join(paper.authors[:3]),
                 "url": paper.url,
                 "source": paper.source,
-                "published_date": paper.published_date or "",
+                "published_date": str(paper.published_date) or "",
                 "source_query": source_query,
-                "saved_at": datetime.utcnow().isoformat(),
+                "saved_at": str(datetime.utcnow().isoformat()),
             })
 
         self._papers_col.upsert(

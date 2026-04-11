@@ -9,12 +9,13 @@ class Settings(BaseSettings):
         extra="ignore",            
     )
 
-    open_api_key: str = os.getenv("OPENAI_API_KEY", "")
-    llm_model: str = "gpt-4o-mini"
+    api_key: str = os.getenv("API_KEY", "")
+    llm_model: str = "llama-3.1-8b-instant"
     llm_temperature: float = 0.0
     arxiv_max_results: int = 10
     semantic_scholar_max_results: int = 8
     chroma_persist_dir: Path = Path("./research_vector_store")
+    chroma_top_k: int = 5
     temporal_decay_lambda: float = 0.05
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     broad_topic_expansion_count: int = 3

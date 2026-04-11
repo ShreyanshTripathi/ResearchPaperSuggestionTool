@@ -114,7 +114,7 @@ def display_session_results(session: ResearchSession) -> None:
             table.add_row(
                 p.title[:55],
                 authors_str[:25],
-                p.published_date or "—",
+                str(p.published_date) or "—",
                 f"{p.relevance_score:.2f}",
                 p.source,
             )

@@ -3,7 +3,7 @@ from typing import List, Optional
 from datetime import datetime
 
 class Paper(BaseModel):
-    paper_id: int
+    paper_id: str
     title: str
     authors: List[str]
     abstract: str
