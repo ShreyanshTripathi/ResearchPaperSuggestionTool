@@ -10,3 +10,4 @@ env/
 .venv/
 pyproject.toml
 research_vector_store/
+DEPLOYMENT.md
