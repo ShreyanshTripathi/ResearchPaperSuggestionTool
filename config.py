@@ -22,5 +22,8 @@ class Settings(BaseSettings):
     agent1_final_papers: int = 5
     agent2_final_papers: int = 6
     agent3_final_papers: int = 4
+    feedback_email_from: str = ""
+    feedback_email_to: str = ""
+    feedback_email_app_password: str = ""
 
 settings = Settings()
