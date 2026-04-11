@@ -1,20 +1,3 @@
-"""
-main.py — Command-line interface for the Research Agent Framework.
-
-WHY a CLI entry point?
-  - Easy to test interactively.
-  - Allows batch use (pipe queries in from a file).
-  - Can be wrapped by a web framework (FastAPI, Streamlit) later without
-    changing any agent code — the CLI is just a thin shell around orchestrator.py.
-
-Usage:
-  python main.py                          # Interactive mode (prompt for query)
-  python main.py --query "machine unlearning RL"
-  python main.py --show-history           # Show the interest map for all past searches
-  python main.py --clear-history          # Wipe ChromaDB (fresh start)
-"""
-
-from __future__ import annotations
 
 import argparse
 import logging
